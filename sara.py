@@ -2,21 +2,23 @@ import streamlit as st
 
 applicants = []
 
-# Adding background color using CSS
-background_color = """
+# Adding background image and color using CSS
+background_style = """
     <style>
         body {
+            background: url('your_image_url.jpg') center center fixed; /* Replace 'your_image_url.jpg' with the URL or path to your image */
+            background-size: cover;
             background-color: #f4f4f4; /* Light gray background color */
         }
     </style>
 """
 
-st.markdown(background_color, unsafe_allow_html=True)
+st.markdown(background_style, unsafe_allow_html=True)
 
 # Rest of your Streamlit app code
 st.write("Haii GOOD MORNING ")
 # Title of the app
-st.title("WELCOME TO OUR WORLD")
+st.title("WELCOME TO ONLINE RESERVATION SYSTEM")
 
 # Header
 st.header("Enter some information below:")
@@ -28,7 +30,7 @@ user_name = st.text_input("Enter your name:")
 user_age = st.slider("Select your age:", 0, 100, 25)
 
 # Dropdown for selecting a country
-user_country = st.selectbox("Select your country:", ["USA", "Canada", "UK","INDIA", "AUSTRIALA", "Other"])
+user_country = st.selectbox("Select your country:", ["USA", "Canada", "UK", "Other","INDIA", "AUSTRIALA", "CHITTOOR", "Other"])
 
 # Button to submit the form
 if st.button("Submit"):
@@ -43,3 +45,4 @@ if st.button("Submit"):
 st.header("List of Applicants:")
 for idx, applicant in enumerate(applicants, start=1):
     st.write(f"{idx}. {applicant['name']} - Age: {applicant['age']}, Country: {applicant['country']}")
+
