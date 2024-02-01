@@ -1,49 +1,69 @@
-import streamlit as st
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
-applicants = []
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hotel.db'
+db = SQLAlchemy(app)
 
-# Adding background color and image using CSS
-background_style = """
-    <style>
-        body {
-            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('Data-Science-focuses-on-algorithms.jpg') center center fixed; /* Replace 'Data-Science-focuses-on-algorithms.jpg' with the URL or path to your image */
-            background-size: cover;
-            background-color: #f4f4f4; /* Light gray background color */
-        }
-    </style>
-"""
+class Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    room_number = db.Column(db.String(10), unique=True, nullable=False)
+    available = db.Column(db.Boolean, default=True)
 
-st.markdown(background_style, unsafe_allow_html=True)
+@app.route('/')
+def home():
+    rooms = Room.query.all()
+    return render_template('index.html', rooms=rooms)
 
-# Rest of your Streamlit app code
-st.write("WELCOME TO TAMILNADU TOURISM ")
-# Title of the app
-st.title("WELCOME TO ONLINE HOTEL RESERVATION SYSTEM")
+@app.route('/reserve/<int:room_id>')
+def reserve(room_id):
+    room = Room.query.get(room_id)
+    if room and room.available:
+        room.available = False
+        db.session.commit()
+    return redirect(url_for('home'))
 
-# Header
-st.header("Enter some information below:")
+@app.route('/cancel/<int:room_id>')
+def cancel(room_id):
+    room = Room.query.get(room_id)
+    if room and not room.available:
+        room.available = True
+        db.session.commit()
+    return redirect(url_for('home'))
 
-# Text input box for the user to enter their name
-user_name = st.text_input("Enter your name:")
+if __name__ == '__main__':
+    db.create_all()
+    app.run(debug=True)
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reservation System</title>
+</head>
+<body>
+    <h1>Hotel Reservation System</h1>
 
-# Slider for selecting age
-user_age = st.slider("Select your age:", 0, 100, 25)
-
-# Dropdown for selecting a country
-user_country = st.selectbox("Select your country:", ["USA", "Canada", "UK", "Other","INDIA", "AUSTRIALA", "CHITTOOR", "Other"])
-
-# Button to submit the form
-if st.button("Submit"):
-    # Display the user's information
-    st.success(f"Hello, {user_name}! You are {user_age} years old and from {user_country}.")
-
-    # Add the applicant to the list
-    applicant = {'name': user_name, 'age': user_age, 'country': user_country}
-    applicants.append(applicant)
-
-# Display the list of applicants
-st.header("List of Applicants:")
-for idx, applicant in enumerate(applicants, start=1):
-    st.write(f"{idx}. {applicant['name']} - Age: {applicant['age']}, Country: {applicant['country']}")
-
-
+    <table border="1">
+        <tr>
+            <th>Room Number</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        {% for room in rooms %}
+        <tr>
+            <td>{{ room.room_number }}</td>
+            <td>{% if room.available %}Available{% else %}Reserved{% endif %}</td>
+            <td>
+                {% if room.available %}
+                    <a href="{{ url_for('reserve', room_id=room.id) }}">Reserve</a>
+                {% else %}
+                    <a href="{{ url_for('cancel', room_id=room.id) }}">Cancel</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
