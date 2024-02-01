@@ -1,37 +1,33 @@
-from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+import streamlit as st
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hotel.db'
-db = SQLAlchemy(app)
+applicants = []
 
-class Room(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    room_number = db.Column(db.String(10), unique=True, nullable=False)
-    available = db.Column(db.Boolean, default=True)
+st.write("Haii GOOD MORNING ")
+# Title of the app
+st.title("WELCOME TO OUR WORLD")
 
-@app.route('/')
-def home():
-    rooms = Room.query.all()
-    return render_template('index.html', rooms=rooms)
+# Header
+st.header("Enter some information below:")
 
-@app.route('/reserve/<int:room_id>')
-def reserve(room_id):
-    room = Room.query.get(room_id)
-    if room and room.available:
-        room.available = False
-        db.session.commit()
-    return redirect(url_for('home'))
+# Text input box for the user to enter their name
+user_name = st.text_input("Enter your name:")
 
-@app.route('/cancel/<int:room_id>')
-def cancel(room_id):
-    room = Room.query.get(room_id)
-    if room and not room.available:
-        room.available = True
-        db.session.commit()
-    return redirect(url_for('home'))
+# Slider for selecting age
+user_age = st.slider("Select your age:", 0, 100, 25)
 
-if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
+# Dropdown for selecting a country
+user_country = st.selectbox("Select your country:", ["USA", "Canada", "UK", "Other","INDIA", "AUSTRIALA", "CHITTOOR", "Other"])
 
+# Button to submit the form
+if st.button("Submit"):
+    # Display the user's information
+    st.success(f"Hello, {user_name}! You are {user_age} years old and from {user_country}.")
+
+    # Add the applicant to the list
+    applicant = {'name': user_name, 'age': user_age, 'country': user_country}
+    applicants.append(applicant)
+
+# Display the list of applicants
+st.header("List of Applicants:")
+for idx, applicant in enumerate(applicants, start=1):
+    st.write(f"{idx}. {applicant['name']} - Age: {applicant['age']}, Country: {applicant['country']}")
