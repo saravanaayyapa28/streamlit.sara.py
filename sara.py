@@ -1,5 +1,5 @@
 import streamlit as st
-st.write("Haii S.GOWTHAMI GOOD MORING ")
+st.write("Haii GOOD MORING ")
 # Import the Streamlit library
 import streamlit as st
 
