@@ -2,6 +2,18 @@ import streamlit as st
 
 applicants = []
 
+# Adding background color using CSS
+background_color = """
+    <style>
+        body {
+            background-color: #f4f4f4; /* Light gray background color */
+        }
+    </style>
+"""
+
+st.markdown(background_color, unsafe_allow_html=True)
+
+# Rest of your Streamlit app code
 st.write("Haii GOOD MORNING ")
 # Title of the app
 st.title("WELCOME TO OUR WORLD")
@@ -16,7 +28,7 @@ user_name = st.text_input("Enter your name:")
 user_age = st.slider("Select your age:", 0, 100, 25)
 
 # Dropdown for selecting a country
-user_country = st.selectbox("Select your country:", ["USA", "Canada", "UK", "Other","INDIA", "AUSTRIALA", "CHITTOOR", "Other"])
+user_country = st.selectbox("Select your country:", ["USA", "Canada", "UK","INDIA", "AUSTRIALA", "Other"])
 
 # Button to submit the form
 if st.button("Submit"):
