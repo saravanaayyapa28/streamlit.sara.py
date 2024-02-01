@@ -6,7 +6,7 @@ applicants = []
 background_style = """
     <style>
         body {
-            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('your_image_url.jpg') center center fixed; /* Replace 'your_image_url.jpg' with the URL or path to your image */
+            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('Data-Science-focuses-on-algorithms.jpg') center center fixed; /* Replace 'Data-Science-focuses-on-algorithms.jpg' with the URL or path to your image */
             background-size: cover;
             background-color: #f4f4f4; /* Light gray background color */
         }
