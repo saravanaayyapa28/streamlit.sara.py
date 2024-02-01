@@ -2,7 +2,6 @@ import streamlit as st
 
 applicants = []
 
-st.write("Haii !!!!!")
 # Title of the app
 st.title("WELCOME TO INDIAN TOURISM")
 
