@@ -16,9 +16,9 @@ background_style = """
 st.markdown(background_style, unsafe_allow_html=True)
 
 # Rest of your Streamlit app code
-st.write("Haii GOOD MORNING ")
+st.write("WELCOME TO TAMILNADU TOURISM ")
 # Title of the app
-st.title("WELCOME TO OUR WORLD")
+st.title("WELCOME TO ONLINE HOTEL RESERVATION SYSTEM")
 
 # Header
 st.header("Enter some information below:")
