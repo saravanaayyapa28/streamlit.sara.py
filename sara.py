@@ -1,12 +1,10 @@
 import streamlit as st
-st.write("Haii GOOD MORING ")
-# Import the Streamlit library
-import streamlit as st
 
-# Streamlit app begins with the 'st' commands
+applicants = []
 
+st.write("Haii GOOD MORNING ")
 # Title of the app
-st.title("WELCOME TO OUR WORLD Saravan")
+st.title("WELCOME TO OUR WORLD")
 
 # Header
 st.header("Enter some information below:")
@@ -24,3 +22,12 @@ user_country = st.selectbox("Select your country:", ["USA", "Canada", "UK", "Oth
 if st.button("Submit"):
     # Display the user's information
     st.success(f"Hello, {user_name}! You are {user_age} years old and from {user_country}.")
+
+    # Add the applicant to the list
+    applicant = {'name': user_name, 'age': user_age, 'country': user_country}
+    applicants.append(applicant)
+
+# Display the list of applicants
+st.header("List of Applicants:")
+for idx, applicant in enumerate(applicants, start=1):
+    st.write(f"{idx}. {applicant['name']} - Age: {applicant['age']}, Country: {applicant['country']}")
