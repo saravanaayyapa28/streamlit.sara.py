@@ -26,8 +26,3 @@ if st.button("Submit"):
     # Add the applicant to the list
     applicant = {'name': user_name, 'age': user_age, 'country': user_country}
     applicants.append(applicant)
-
-# Display the list of applicants
-st.header("List of Applicants:")
-for idx, applicant in enumerate(applicants, start=1):
-    st.write(f"{idx}. {applicant['name']} - Age: {applicant['age']}, Country: {applicant['country']}")
