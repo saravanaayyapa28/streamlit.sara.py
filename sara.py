@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import base64  # Added import for base64
 
 # Sample data for available rooms
 room_data = {
@@ -20,26 +19,18 @@ def book_room(room_number):
 # Streamlit app
 def main():
     # Set background color
-    main_bg = 'C:\\Users\\DELL\\Desktop\\Images.jpg'  # Using double backslashes
-    side_bg = 'C:\Users\DELL\Desktop\Images.jpg'  # Replace with the path to your sidebar background image
-    main_bg_ext = "jpg"  # Replace with the extension of your main background image
-    side_bg_ext = "jpg"  # Replace with the extension of your sidebar background image
-
     st.markdown(
-        f"""
+        """
         <style>
-        .reportview-container {{
-            background: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()})
-        }}
-        .sidebar .sidebar-content {{
-            background: url(data:image/{side_bg_ext};base64,{base64.b64encode(open(side_bg, "rb").read()).decode()})
-        }}
+        body {
+            background-color: #f0f0f0; /* Light gray background */
+        }
         </style>
         """,
         unsafe_allow_html=True
     )
 
-    st.title("Hotel Room Booking System")
+    st.title("Welcome To Online V/S Offline Hotel Reservation Prediction System")
 
     option1 = st.sidebar.selectbox('Select action 1', ['View Rooms', 'Book a Room'])
     option2 = st.sidebar.selectbox('Select action 2', ['Option A', 'Option B'])
