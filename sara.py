@@ -32,13 +32,14 @@ def main():
 
     st.title("Hotel Room Booking System")
 
-    option = st.sidebar.selectbox('Select an action', ['View Rooms', 'Book a Room'])
+    option1 = st.sidebar.selectbox('Select action 1', ['View Rooms', 'Book a Room'])
+    option2 = st.sidebar.selectbox('Select action 2', ['Option A', 'Option B'])
 
-    if option == 'View Rooms':
+    if option1 == 'View Rooms':
         st.subheader('Available Rooms')
         st.dataframe(df_rooms[df_rooms['Availability'] == True])
 
-    elif option == 'Book a Room':
+    elif option1 == 'Book a Room':
         st.subheader('Book a Room')
         selected_room = st.selectbox('Select a Room', df_rooms[df_rooms['Availability'] == True]['Room Number'])
         book_button = st.button('Book Room')
@@ -46,6 +47,12 @@ def main():
         if book_button:
             book_room(selected_room)
             st.success(f"Room {selected_room} booked successfully!")
+
+    # Additional logic for option2
+    if option2 == 'Option A':
+        st.write("You selected Option A.")
+    elif option2 == 'Option B':
+        st.write("You selected Option B.")
 
 if __name__ == "__main__":
     main()
