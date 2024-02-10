@@ -1,30 +1,39 @@
 import streamlit as st
+import pandas as pd
 
-applicants = []
+# Sample data for available rooms
+room_data = {
+    'Room Number': [101, 102, 103, 201, 202, 203],
+    'Capacity': [2, 2, 2, 4, 4, 4],
+    'Price per Night': [100, 120, 150, 200, 250, 300],
+    'Availability': [True, True, True, True, True, True]
+}
 
-# Title of the app
-st.title("WELCOME TO INDIAN TOURISM")
+df_rooms = pd.DataFrame(room_data)
 
-# Header
-st.header("Enter some information below:")
+# Function to book a room
+def book_room(room_number):
+    index = df_rooms.index[df_rooms['Room Number'] == room_number].tolist()[0]
+    df_rooms.at[index, 'Availability'] = False
 
-# Text input box for the user to enter their surname
-user_surname = st.text_input("Enter your Surname:")
+# Streamlit app
+def main():
+    st.title("Hotel Room Booking System")
 
-# Text input box for the user to enter their middle name
-user_middle_name = st.text_input("Enter your Middle Name:")
+    option = st.sidebar.selectbox('Select an action', ['View Rooms', 'Book a Room'])
 
-# Slider for selecting age
-user_age = st.slider("Select your age:", 0, 100, 25)
+    if option == 'View Rooms':
+        st.subheader('Available Rooms')
+        st.dataframe(df_rooms[df_rooms['Availability'] == True])
 
-# Dropdown for selecting a country
-user_country = st.selectbox("Select your country:", ["USA", "Canada", "UK", "Other", "INDIA", "AUSTRALIA", "CHITTOOR", "Other"])
+    elif option == 'Book a Room':
+        st.subheader('Book a Room')
+        selected_room = st.selectbox('Select a Room', df_rooms[df_rooms['Availability'] == True]['Room Number'])
+        book_button = st.button('Book Room')
 
-# Button to submit the form
-if st.button("Submit"):
-    # Display the user's information
-    st.success(f"Hello, {user_surname} {user_middle_name}! You are {user_age} years old and from {user_country}.")
+        if book_button:
+            book_room(selected_room)
+            st.success(f"Room {selected_room} booked successfully!")
 
-    # Add the applicant to the list
-    applicant = {'surname': user_surname, 'middle_name': user_middle_name, 'age': user_age, 'country': user_country}
-    applicants.append(applicant)
+if __name__ == "__main__":
+    main()
