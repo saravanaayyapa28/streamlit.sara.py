@@ -34,6 +34,7 @@ def main():
 
     option1 = st.sidebar.selectbox('Select action 1', ['View Rooms', 'Book a Room'])
     option2 = st.sidebar.selectbox('Select action 2', ['Option A', 'Option B'])
+    option3 = st.sidebar.selectbox('Select action 3', ['Action X', 'Action Y', 'Action Z'])
 
     if option1 == 'View Rooms':
         st.subheader('Available Rooms')
@@ -53,6 +54,14 @@ def main():
         st.write("You selected Option A.")
     elif option2 == 'Option B':
         st.write("You selected Option B.")
+
+    # Additional logic for option3
+    if option3 == 'Action X':
+        st.write("You selected Action X.")
+    elif option3 == 'Action Y':
+        st.write("You selected Action Y.")
+    elif option3 == 'Action Z':
+        st.write("You selected Action Z.")
 
 if __name__ == "__main__":
     main()
