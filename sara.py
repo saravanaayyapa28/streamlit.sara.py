@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import base64  # Added import for base64
 
 # Sample data for available rooms
 room_data = {
@@ -19,12 +20,20 @@ def book_room(room_number):
 # Streamlit app
 def main():
     # Set background color
+    main_bg = 'C:\Users\DELL\Desktop\Images_bg.jpg'  # Replace with the path to your main background image
+    side_bg = 'C:\Users\DELL\Desktop\Images_bg.jpg'  # Replace with the path to your sidebar background image
+    main_bg_ext = "jpg"  # Replace with the extension of your main background image
+    side_bg_ext = "jpg"  # Replace with the extension of your sidebar background image
+
     st.markdown(
-        """
+        f"""
         <style>
-        body {
-            background-color: #f0f0f0; /* Light gray background */
-        }
+        .reportview-container {{
+            background: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()})
+        }}
+        .sidebar .sidebar-content {{
+            background: url(data:image/{side_bg_ext};base64,{base64.b64encode(open(side_bg, "rb").read()).decode()})
+        }}
         </style>
         """,
         unsafe_allow_html=True
