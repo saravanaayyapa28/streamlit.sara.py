@@ -18,6 +18,18 @@ def book_room(room_number):
 
 # Streamlit app
 def main():
+    # Set background color
+    st.markdown(
+        """
+        <style>
+        body {
+            background-color: #f0f0f0; /* Light gray background */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.title("Hotel Room Booking System")
 
     option = st.sidebar.selectbox('Select an action', ['View Rooms', 'Book a Room'])
