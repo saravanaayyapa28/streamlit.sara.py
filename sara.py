@@ -33,8 +33,8 @@ def main():
     st.title("Welcome To Online V/S Offline Hotel Reservation Prediction System")
 
     option1 = st.sidebar.selectbox('Select action 1', ['View Rooms', 'Book a Room'])
-    option2 = st.sidebar.selectbox('Select action 2', ['Option A', 'Option B'])
-    option3 = st.sidebar.selectbox('Select action 3', ['Action X', 'Action Y', 'Action Z'])
+    option2 = st.sidebar.selectbox('Select The Country ', ['|India ', 'USA', 'Singapore'])
+    option3 = st.sidebar.selectbox('Select The city', ['Action X', 'Action Y', 'Action Z'])
 
     if option1 == 'View Rooms':
         st.subheader('Available Rooms')
