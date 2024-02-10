@@ -20,8 +20,8 @@ def book_room(room_number):
 # Streamlit app
 def main():
     # Set background color
-    main_bg = 'C:\Users\DELL\Desktop\Images_bg.jpg'  # Replace with the path to your main background image
-    side_bg = 'C:\Users\DELL\Desktop\Images_bg.jpg'  # Replace with the path to your sidebar background image
+    main_bg = 'C:\Users\DELL\Desktop\Images.jpg'  # Replace with the path to your main background image
+    side_bg = 'C:\Users\DELL\Desktop\Images.jpg'  # Replace with the path to your sidebar background image
     main_bg_ext = "jpg"  # Replace with the extension of your main background image
     side_bg_ext = "jpg"  # Replace with the extension of your sidebar background image
 
